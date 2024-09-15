@@ -1,7 +1,8 @@
 "use client";
+
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -9,7 +10,7 @@ const pageVariants = {
   exit: { opacity: 0, transition: { duration: 0.5 } },
 };
 
-const Answers = () => {
+const AnswersContent = () => {
   const searchParams = useSearchParams();
   const [response, setResponse] = useState<string | null>(null);
 
@@ -48,6 +49,14 @@ const Answers = () => {
         <p>Loading...</p>
       )}
     </motion.div>
+  );
+};
+
+const Answers = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AnswersContent />
+    </Suspense>
   );
 };
 
