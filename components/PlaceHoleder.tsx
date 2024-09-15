@@ -45,7 +45,7 @@ export function Placeholders() {
   };
 
   return (
-    <div className="flex flex-col w-1/2 justify-center items-center">
+    <div className="flex flex-col w-full md:w-1/2 justify-center items-center">
       <PlaceholdersAndVanishInput
         placeholders={placeholders}
         onChange={handleChange}

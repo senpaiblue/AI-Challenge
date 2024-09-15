@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { useEffect, useState, Suspense } from "react";
+import { TextGenerateEffect } from "@/components/ui/TextGenerateEffect";
 
 const pageVariants = {
   initial: { opacity: 0 },
@@ -36,13 +37,16 @@ const AnswersContent = () => {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="flex flex-col justify-center items-center min-h-screen bg-gray-900 text-white p-6"
+      className="flex flex-col justify-center items-center min-h-screen bg-neutral-900 text-white p-6"
     >
       {response ? (
         <>
-          <h1 className="text-4xl font-bold mb-6">Gemini Answer:</h1>
-          <div className="mt-4 p-4 bg-gray-800 text-white rounded-md shadow-md max-w-3xl w-full">
-            <p>{response}</p>
+          <h1 className="text-4xl font-bold mb-6">
+            <TextGenerateEffect words="Answer"/></h1>
+          <div className="mt-4 px-20 py-12 bg-neutral-800 text-white rounded-2xl shadow-md max-w-3xl w-full">
+            <p className="leading-loose">
+              <TextGenerateEffect words={response}/>
+              </p>
           </div>
         </>
       ) : (

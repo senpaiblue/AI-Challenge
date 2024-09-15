@@ -15,6 +15,9 @@ import { Placeholders } from "./PlaceHoleder";
 import { useRouter } from "next/navigation";
 import { run } from "../pages/api/geminiInteragtion";
 import { ThreeDots } from "react-loader-spinner";
+import { Spotlight } from "./ui/Spotlight";
+import { FlipWords } from "./ui/Flip";
+import { TextGenerateEffect } from "./ui/TextGenerateEffect";
 
 export function SidebarDemo() {
   const links = [
@@ -30,18 +33,7 @@ export function SidebarDemo() {
       href: "/Answers",
       icon: <IconUserBolt className="text-neutral-200 h-5 w-5 flex-shrink-0" />,
     },
-    {
-      label: "Settings",
-      href: "#",
-      icon: <IconSettings className="text-neutral-200 h-5 w-5 flex-shrink-0" />,
-    },
-    {
-      label: "Logout",
-      href: "#",
-      icon: (
-        <IconArrowLeft className="text-neutral-200 h-5 w-5 flex-shrink-0" />
-      ),
-    },
+    
   ];
   const [open, setOpen] = useState(false);
   return (
@@ -97,7 +89,7 @@ export const Logo = () => {
         animate={{ opacity: 1 }}
         className="font-medium text-white whitespace-pre"
       >
-        Acet Labs
+        AI challenge
       </motion.span>
     </Link>
   );
@@ -114,6 +106,7 @@ export const LogoIcon = () => {
 
 // Dashboard component with topics and Gemini API response section
 const Dashboard = () => {
+  const words = ["Hello","नमस्ते", "こんにちは ", "안녕하세요", "Bonjour"," Γειά σας","Ciao"];
   const topics = [
     { topic: "Food" },
     { topic: "Music" },
@@ -143,17 +136,26 @@ const Dashboard = () => {
 
   return (
     <div className="flex w-full h-full items-center justify-center">
-      <div className="p-8 md:p-10 rounded-tl-2xl border border-neutral-700 bg-neutral-900 flex flex-col gap-2 items-center justify-between w-full h-full">
-        <div className="flex flex-col gap-8">
-          <h3 className="text-4xl text-center w-full">Hello!</h3>
+     
+      
+      <div className="p-8 md:p-10  antialiased bg-grid-neutral-700/[0.04] relative overflow-hidden border border-neutral-700 bg-neutral-900 flex flex-col gap-2 items-center justify-between w-full h-full">
+      <Spotlight
+        className="-top-40 left-0 md:left-60 md:-top-48"
+        fill="gray"
+      />
+        <div className="flex flex-col relative z-10 gap-8">
+        <h3 className="text-4xl text-center lg:text-center md:text-5xl font-bold dark:text-black">
+        <FlipWords words={words} />
+      ! Human <br />
+      </h3>
           <div className="flex w-full flex-row flex-wrap items-center justify-center gap-4">
             {topics.map((item) => (
               <div
                 key={"first-array" + item.topic}
-                className="h-20 w-[40%] px-6 md:px-12 rounded-xl bg-neutral-800 items-center justify-center flex cursor-pointer hover:bg-neutral-700 transition-colors"
+                className="h-20 w-[40%] px-6 md:px-12 rounded-xl border border-neutral-700 bg-neutral-800 items-center justify-center flex cursor-pointer hover:bg-neutral-700 transition-colors"
                 onClick={() => handleTopicClick(item.topic)}
               >
-                <h3 className="text-center">{item.topic}</h3>
+                <h3 className="text-center"><TextGenerateEffect words={item.topic}/></h3>
               </div>
             ))}
           </div>
