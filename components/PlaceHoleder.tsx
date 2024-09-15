@@ -1,14 +1,13 @@
 "use client";
 import { useState } from "react";
 import { PlaceholdersAndVanishInput } from "../components/ui/PlaceholdersAndVanishInput";
-import { run } from "../pages/api/geminiInteragtion"; // Ensure this is valid
-import { useRouter } from "next/navigation"; // Correct App Router hook
-import { ThreeDots } from "react-loader-spinner"; // Loader component
+import { run } from "../pages/api/geminiInteragtion";
+import { useRouter } from "next/navigation";
+import { ThreeDots } from "react-loader-spinner";
 
 export function Placeholders() {
-  const [answer, setAnswer] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const router = useRouter(); // Router for navigation
+  const router = useRouter();
 
   const placeholders = [
     "What's on your mind today?",
@@ -19,30 +18,29 @@ export function Placeholders() {
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value); // Log input changes
+    console.log(e.target.value);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const input = (e.currentTarget.elements[0] as HTMLInputElement).value;
-    if (!input) return; // Prevent empty input submission
+    if (!input) return;
 
     setLoading(true);
-    setAnswer(null); // Clear previous answer
 
     try {
-      const response = await run(input); // Call your API integration
-      console.log("Response received:", response); // Log the response
-      setAnswer(response); // Update the answer
+      const response = await run(input);
+      console.log("Response received:", response);
 
-      // Navigate to the "Answers" page with the response as a query param
-      const encodedResponse = encodeURIComponent(response);
-      router.push(`/Answers?answer=${encodedResponse}`);
+      // Set a flag in sessionStorage to indicate that a refresh is needed
+      sessionStorage.setItem('needsRefresh', 'true');
+
+      // Navigate to the Answers page
+      router.push(`/Answers?answer=${encodeURIComponent(response)}`);
     } catch (error) {
       console.error("Error fetching Gemini API response", error);
-      setAnswer("Sorry, something went wrong.");
-      setLoading(false);  // Reset loading state after error
+      setLoading(false);
     }
   };
 
@@ -56,7 +54,7 @@ export function Placeholders() {
 
       {loading && (
         <div className="flex justify-center items-center h-12">
-          <ThreeDots color="#00BFFF" height={80} width={80} />
+          <ThreeDots color="#666666" height={80} width={80} />
         </div>
       )}
     </div>
