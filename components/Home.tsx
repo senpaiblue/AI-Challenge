@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "../components/ui/Sidebar";
 import {
   IconBrandTabler,
-  IconUserBolt,
+  IconMessage2Bolt,
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -30,7 +30,7 @@ export function SidebarMain() {
     {
       label: "Answer",
       href: "/Answers",
-      icon: <IconUserBolt className="text-neutral-200 h-5 w-5 flex-shrink-0" />,
+      icon: <IconMessage2Bolt className="text-neutral-200 h-5 w-5 flex-shrink-0" />,
     },
   ];
   const [open, setOpen] = useState(false);
@@ -136,15 +136,15 @@ const Dashboard = () => {
 
   return (
     <div className="flex w-full h-full items-center justify-center">
-      <div className="p-8 md:p-10  antialiased bg-grid-neutral-700/[0.04] relative overflow-hidden border border-neutral-700 bg-neutral-900 flex flex-col gap-2 items-center justify-between w-full h-full">
+      <div className="p-8 md:p-10  antialiased bg-grid-neutral-700/[0.03] relative overflow-hidden border border-neutral-700 bg-neutral-900 flex flex-col gap-2 items-center justify-between w-full h-full">
         <Spotlight
           className="-top-40 left-0 md:left-60 md:-top-48"
           fill="gray"
         />
-        <Spotlight
+        {/* <Spotlight
           className="-top-0 left-24 md:left-60 md:-top-0"
           fill="gray"
-        />
+        /> */}
         <div className="flex flex-col relative z-10 gap-8">
           <h3 className="text-4xl text-center lg:text-center md:text-5xl font-bold dark:text-black">
             <FlipWords words={words} />

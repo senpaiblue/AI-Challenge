@@ -12,7 +12,6 @@ export function Placeholders() {
   const placeholders = [
     "What's on your mind today?",
     "Want to get answers?",
-    "I got this!",
     "Don't trust?",
     "Test me out",
   ];
