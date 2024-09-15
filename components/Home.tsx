@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "../components/ui/Sidebar";
 import {
-  IconBrandTabler,
+  IconHome2,
   IconMessage2Bolt,
 } from "@tabler/icons-react";
 import Link from "next/link";
@@ -24,7 +24,7 @@ export function SidebarMain() {
       label: "Home",
       href: "#",
       icon: (
-        <IconBrandTabler className="text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <IconHome2 className="text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
@@ -107,7 +107,7 @@ const Dashboard = () => {
   const words = [
     "Hello",
     "नमस्ते",
-    "こんにちは ",
+    "こんにちは",
     "안녕하세요",
     "Bonjour",
     " Γειά σας",
