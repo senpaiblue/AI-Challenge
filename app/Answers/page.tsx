@@ -43,7 +43,7 @@ const AnswersContent = () => {
         <>
           <h1 className="text-4xl font-bold mb-6">
             <TextGenerateEffect words="Answer"/></h1>
-          <div className="mt-4 px-20 py-12 bg-neutral-800 text-white rounded-2xl shadow-md max-w-3xl w-full">
+          <div className="mt-4 md:px-12 md:py-8 p-4 lg:px-20 lg:py-12 bg-neutral-800 text-white rounded-2xl shadow-md max-w-3xl w-full">
             <p className="leading-loose">
               <TextGenerateEffect words={response}/>
               </p>
