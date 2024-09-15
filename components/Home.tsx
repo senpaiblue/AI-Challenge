@@ -1,4 +1,3 @@
-// pages/SidebarDemo.tsx
 "use client";
 import React, { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "../components/ui/Sidebar";
@@ -12,7 +11,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/utils/cn";
-import { Placeholders } from "./PlaceHoleder";  // Import the Placeholders component for Gemini API interaction
+import { Placeholders } from "./PlaceHoleder";
+import { useRouter } from "next/navigation";
+import { run } from "../pages/api/geminiInteragtion";
+import { ThreeDots } from "react-loader-spinner";
 
 export function SidebarDemo() {
   const links = [
@@ -113,40 +115,57 @@ export const LogoIcon = () => {
 // Dashboard component with topics and Gemini API response section
 const Dashboard = () => {
   const topics = [
-    {
-      topic: "Food",
-    },
-    {
-      topic: "Music",
-    },
-    {
-      topic: "Art",
-    },
-    {
-      topic: "Anime",
-    },
+    { topic: "Food" },
+    { topic: "Music" },
+    { topic: "Art" },
+    { topic: "Anime" },
   ];
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  const handleTopicClick = async (topic: string) => {
+    setLoading(true);
+    try {
+      const prompt = `Tell me something interesting about ${topic}`;
+      const response = await run(prompt);
+      console.log("Response received:", response);
+
+      // Set a flag in sessionStorage to indicate that a refresh is needed
+      sessionStorage.setItem('needsRefresh', 'true');
+
+      // Navigate to the Answers page
+      router.push(`/Answers?answer=${encodeURIComponent(response)}`);
+    } catch (error) {
+      console.error("Error fetching Gemini API response", error);
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="flex w-full h-full items-center justify-center">
       <div className="p-8 md:p-10 rounded-tl-2xl border border-neutral-700 bg-neutral-900 flex flex-col gap-2 items-center justify-between w-full h-full">
-        {/* Section for greeting and topics */}
         <div className="flex flex-col gap-8">
           <h3 className="text-4xl text-center w-full">Hello!</h3>
           <div className="flex w-full flex-row flex-wrap items-center justify-center gap-4">
-            {topics.map((items) => (
+            {topics.map((item) => (
               <div
-                key={"first-array" + items.topic}
-                className="h-20 w-[40%] px-6 md:px-12 rounded-xl bg-neutral-800 items-center justify-center flex animate-pulse"
+                key={"first-array" + item.topic}
+                className="h-20 w-[40%] px-6 md:px-12 rounded-xl bg-neutral-800 items-center justify-center flex cursor-pointer hover:bg-neutral-700 transition-colors"
+                onClick={() => handleTopicClick(item.topic)}
               >
-                <h3 className="text-center">{items.topic}</h3>
+                <h3 className="text-center">{item.topic}</h3>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Section for Gemini API input and responses */}
+        {loading ? (
+          <div className="flex justify-center items-center h-12">
+          <ThreeDots color="#666666" height={80} width={80} />
+        </div>
+        ) : (
           <Placeholders />
+        )}
       </div>
     </div>
   );
