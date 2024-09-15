@@ -9,6 +9,7 @@ Delpoyed -> https://ai-challenge-bay.vercel.app/
 Figma -> https://www.figma.com/design/kHdKmmfMXXPwHFlkXbpgIB/AI-Challenge?node-id=0-1&t=lkDubaDNCR3KIM7i-1
 
 ```
+
 ## Question-Answering Interface
 
 ![Example Image](/public/HomeDesktop.png)
@@ -34,9 +35,11 @@ bun dev
 ## Overview of implemented features and notable animations.
 
 ```bash
-First Home Page with topcis and and placeholder input field for prompting. Input field has changing placeholder animation.
+ Home Page with topcis and and placeholder input field for prompting. Input field has changing placeholder animation.
 
-Then Gemini api integration which helps to generate response, response generates with a smooth text generate animation.
+ Gemini api integration which helps to generate response, response generates with a smooth text generate animation.
 
-Now Heading animation in homepage and smooth entrance animation of gradients in homepage.
+ Heading animation in homepage and smooth entrance animation of gradients in homepage.
+
+ Sidebar onhover animation.
 ```
